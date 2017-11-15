@@ -2,16 +2,18 @@
  * Tests the internet connection & Gets the latest API Keys & Secrets
  *
  * @returns {Promise} The XMLHttpRequest that's testing the internet connection
+ *
+ * Don't check license Cheeeeeen~!
  */
-function testInternet(checklicense, checkUpdate, callback) {
+function testInternet(checkUpdate, callback) {
 	console.log("Testing internet & checking for updates...")
 
 	const currentVersion = remote.app.getVersion()
-	const url = `https://getharmony.xyz/data.php?license=${settings.license}&v=${currentVersion}&machineId=${uniqueId}&platform=${process.platform}`
+	//const url = `https://getharmony.xyz/data.php?license=${settings.license}&v=${currentVersion}&machineId=${uniqueId}&platform=${process.platform}`
 
 	request(url, (err, res, body) => {  
 		if (err) {
-			console.warn('Offline !')
+			console.warn("Can't access server, supposing offline.")
 			console.warn(err)
 			offline = true// Global var
 			if (callback) callback(false)
@@ -23,9 +25,9 @@ function testInternet(checklicense, checkUpdate, callback) {
 		body = JSON.parse(body)
 		settings.client_ids = body.clientIds
 
-		//The annoying popup
-		const licenseIsValid = body['licenseValid']
-		if (checklicense && !licenseIsValid) licenseDialog((settings.license != ''))
+		//The annoying popup is gone
+		//const licenseIsValid = body['licenseValid']
+		//if (checklicense && !licenseIsValid) licenseDialog((settings.license != ''))
 
 		if (callback) callback(true)
 
@@ -45,6 +47,7 @@ function testInternet(checklicense, checkUpdate, callback) {
 	})
 }
 
+/*
 function licenseDialog(wrongLicense) {
 	let body
 	if (wrongLicense) body = "Hey! I hope you enjoy Harmony.\n\nThis is an unregistered evaluation version.\nAlthough the trial is untimed, a license must be purchased for continued use.\n\nIt seems like the license you entered isn't valid. If you think that's an error, contact vince@getharmony.xyz"
@@ -62,6 +65,7 @@ function licenseDialog(wrongLicense) {
 	})
 
 }
+*/
 
 function oauthLogin (url, callback) {
 	

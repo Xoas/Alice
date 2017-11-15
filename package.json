@@ -22,7 +22,7 @@
     "spotify"
   ],
   "devDependencies": {
-    "electron": "^1.6.1",
+    "electron": "^1.7.9",
     "electron-builder": "^19.37.2"
   },
   "dependencies": {
@@ -49,13 +49,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vincelwt/harmony.git"
+    "url": "https://github.com/xoascf/harmony.git"
   },
   "build": {
     "asar": false,
     "appId": "com.vincelwt.harmony",
     "compression": "maximum",
-    "iconUrl": "https://raw.githubusercontent.com/vincelwt/harmony/master/build/icon.ico",
+    "iconUrl": "https://raw.githubusercontent.com/xoascf/harmony/master/build/icon.ico",
     "mac": {
       "category": "public.app-category.music"
     },

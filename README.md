@@ -12,7 +12,9 @@
 
 Harmony is a music player that lets you connect to social networks and fetch your music so you can enjoy it "better", created by Vincent Loewert.
 
-The Harmony Open Source Collaboration Project it's the project that keeps alive the best of the original application without any interest, from the community, for you, with love.
+...but currently (by decision of the creator to "get something in return") is nagware and proprietary software.
+
+The Harmony Open Source Collaboration Project is the project that keeps alive the best of the original application without any interest, from the community, for you, with love.
 
 This project is intended to be an open and improved project, optimized and trying to work in a decentralized way, if the APIs of the original application still allow us to use it legally.
 
@@ -28,6 +30,11 @@ This project is intended to be an open and improved project, optimized and tryin
 * Keyboard control
 * Distraction-free
 * Background notifications
+
+## What's new?
+
+* Updated to 0.7.2
+* It's not nagware anymore! Now it's an open project again! (Community Edition)
 
 ## Download
 
@@ -93,6 +100,8 @@ Or if you enjoyed using Harmony and would like to support the development, pleas
 
 Translations are not yet a high priority, but you can support us with that, well... it is expected that the system will be implemented in the future, please be patient.
 
+Wait for the v0.8.0 update!
+
 ## Development environment
 
 To get a local development copy running, you will need:
@@ -125,7 +134,7 @@ After running the above steps, a copy of Harmony should begin running.
 
 This repo is a product of the license established in the license page of the app [here](http://web.archive.org/web/20171115010739/https://getharmony.xyz/license), because it does not stipulate any prohibition or sanction to the decompilation and reverse engineering to date the program can be modified to the user's liking.
 
-The difference here is that you don't need to pay for any license, and I think $5,157 is already too much money for a 17-year-old boy.
+The difference here is that you don't need to pay for any license (optionally, to get rid of that "annoying window"). It's free maintained by the community as "Community Edition".
 
 
 ## Thanks to
@@ -136,3 +145,6 @@ Thanks to all the collaborators of the original app, without them this applicati
 
 
 [//]: # (I believe that people who launch an application from the beginning as "Open Source" should assume that responsibility, since returning it commercially I would see it as a loss if it is not applied from the first day, however it was a good strategy to get users.)
+[//]: # (I think over $5k is already too much money for a 17-year-old boy. However, he doesn't do it to earn interest rather than to improve Harmony.)
+[//]: # (Under GNU license?)
+[//]: # (Armonía: Music Player!)

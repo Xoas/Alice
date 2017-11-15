@@ -225,7 +225,7 @@ function init(refresh, licenseCheck = true) {
 
 		if (settings.activeTab) changeActiveTab(settings.activeTab)
 
-		testInternet(licenseCheck, settings.checkUpdate)
+		//testInternet(licenseCheck, settings.checkUpdate)
 
 		if (refresh || settings.refreshOnStart) return getData(false, false)
 	})
@@ -236,7 +236,7 @@ function init(refresh, licenseCheck = true) {
 * Fetch the data and refresh the tracklist
 */
 
-function getData(licenseCheck, internetCheck = true) {
+function getData(internetCheck = true) {
 
 	Data.remove({ }, { multi: true }) // Empty current data
 

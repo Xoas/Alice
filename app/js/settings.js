@@ -126,7 +126,7 @@ function resetSettings(update) {
 	settings = {
 		volume: 1,
 		notifOff: false,
-		license: '',
+		license: 'Community Edition',
 		primaryTheme: (process.platform === 'darwin' ? 'css/vibrancy.css' : ''),
 		secondaryTheme: 'css/dark.css',
 		coverView: false,
