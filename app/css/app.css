@@ -1,0 +1,1110 @@
+/* If windows */
+#header.win32 {
+}
+
+#header.osx {
+	padding-top: 12px;
+	max-height: 65px;
+	-webkit-app-region: drag
+}
+
+/*** Cool transitions when changing themes ***/
+
+.changeTheme * {
+	transition: background 0.4s ease 0s;
+}
+
+/* --------------- */
+
+.hide {
+	display: none !important;
+}
+
+.alertMsg {
+	display: table;
+	height: 90vh;
+	width: 100%;
+}
+
+.alertMsg > h3 {
+	text-align: center;
+	white-space: normal;
+	padding: 0px 30px;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+#sidebar .icon.icon-play.playing {
+	color: #54a7ff;
+	position: absolute;
+	margin: 0px;
+	right: 0;
+	font-size: 13px;
+}
+
+.toolbar {
+	max-height: 52px;
+	box-shadow: none;
+	background: #DEDEDE;
+}
+
+#header .title {
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	text-overflow: ellipsis;
+	max-width: 50%;
+}
+
+#menuItems {
+	font-size: 13px;
+}
+
+.serviceTitle {
+	margin: 0;
+	padding: 10px 10px 2px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #666666;
+}
+
+.playlistTitle .icon {
+	font-size: 17px;
+	width: 19px;
+	height: 18px;
+	float: left;
+	color: #737475;
+	margin-top: -3px;
+	margin-right: 7px;
+	text-align: center;
+}
+
+.playlistTitle:active, 
+.playlistTitle.active {
+  background-color: #dcdfe1;
+}
+
+.playlistTitle {
+	padding: 2px 5px 1px 20px;
+	display: block;
+	color: #333;
+	text-decoration: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/*********** LAYOUT *********/
+
+tr:not(.basicContext__item) {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+th {
+	cursor: pointer
+}
+
+.listTrack,
+.listFilter,
+.coverElement {
+	color: #333;
+}
+
+.listTrack.selected {
+	color: #fff;
+	background: #116cd6;
+}
+
+#trackListTable tbody {
+	height: 100%;
+	display: block;
+	overflow-y: scroll;
+}
+
+#trackListTable {
+	height: 100%;
+}
+
+tr .duration {
+	width: 65px;
+}
+
+td.duration { /** So titles aren't concerned */
+	text-align: right;
+}
+
+tr .artist,
+tr [name='albumCol'] {
+	width: 30%;
+}
+
+@media screen and (max-width: 1000px){
+	[name='albumCol'] {
+		display: none;
+	}
+
+	tr .artist {
+		width: 35%;
+	} 
+}
+
+/*** Coverview ***/
+
+
+/*** Playing icon over cover **/
+div > .icon.icon-play {
+	color: #fff;
+	position: absolute;
+	padding: 6px 19px;
+	background: rgba(0, 0, 0, 0.55);
+	font-size: 24px;
+}
+
+#coverView {
+	overflow: hidden;
+	transform: translate3d(0,0,0); /** Force GPU rendering (noticable on scrolls) **/
+}
+
+.coverElement {
+	background: #f5f5f5;
+	width: 100%;
+	min-height: 50px;
+	cursor: pointer;
+	position: relative; /** Dunno really why, if not the playing icons bug*/
+}
+
+.coverElement.selected {
+	color: #fff;
+	background: #116cd6;
+}
+
+.coverElement > img {
+	height: 50px;
+	width: 50px;
+	float: left;
+}
+
+.coverElement > h3 {
+	font-size: 13px;
+	margin: 0;
+	margin-right: 55px;
+	position: relative;
+	left: 10px;
+	top: 5px;
+}
+
+.coverElement > h4 {
+	margin: 0;
+	font-size: 11px;
+	position: relative;
+	left: 10px;
+	top: 5px;
+}
+
+.coverElement span.duration { /* Duration or number of tracks in album */
+	float: right;
+	font-size: 11px;
+	right: 10px;
+	line-height: 0;
+	position: relative;
+	top: -13px;
+}
+
+/***************/
+
+.pane-group {
+	overflow-x: hidden; /* Resolving for bug when resizing X axis (little white space for scrollbar)*/
+	display: block;
+}
+
+#sidebar {
+	width: 20%;
+	float: left;
+	max-width: 95%;
+	min-width: 5%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background: #ECE9E6;
+}
+
+#sidebar.hide {
+	width: 0;
+}
+
+.pane {
+	height: 100%;
+	border-left: none;
+}
+
+.tracksContainer {
+	color: rgba(0, 0, 0, 0.4);
+}
+
+#empty_tracklist,
+#specialViewEmpty {
+	position: relative;
+	top: -10%;
+	height: 100%;
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+	font-size: 25px;
+	font-weight: 300;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#refreshStatus {
+	position: absolute;
+	background: #fff;
+	border: 1px solid #ddd;
+	bottom: 25px;
+	left: 30px;
+	padding: 2px 8px;
+	border-radius: 4px;
+	z-index: 10000;
+}
+
+#refreshStatus:after, #refreshStatus:before {
+	top: 100%;
+	left: 20px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+#refreshStatus:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-top-color: #fff;
+	border-width: 6px;
+	margin-left: -10px;
+}
+
+#refreshStatus:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-top-color: #ddd;
+	border-width: 7px;
+	margin-left: -11px;
+}
+
+#statusRefresh {
+	color: #4F8A10;
+}
+
+#statusOffline,
+#statusLonger {
+	color: #00529B;
+}
+
+#statusError {
+	color: #D8000C;
+}
+
+#footer .toolbar-actions {
+	margin: 0px;
+	padding: 0px;
+}
+
+.footerBtn {
+	font-size: 14px;
+	color: #6b6b6b;
+	fill: #6b6b6b;
+	padding: 0px 8px;
+	cursor: pointer;
+}
+
+.footerBtn .icon {
+	margin-bottom: 0px;
+	font-size: 13px;
+}
+
+#footer svg {
+	position: relative;
+	top: 2px;
+	padding: 0px;
+}
+
+.footerBtn.active {
+	fill: #007CFF;
+	color: #007CFF;
+}
+
+
+/** Used for the spinning loader on library refresh **/
+
+.spinning {
+	animation: spin 2s linear infinite;
+	animation-direction: reverse;
+}
+
+@keyframes spin { 
+	100% { 
+		transform: rotate(360deg); 
+	} 
+}
+
+/** Search Bar && results**/
+
+#searchBar {
+	-webkit-app-region: no-drag;
+	position: relative;
+	bottom: 16px;
+	display: inline-block;
+	margin-bottom: 0px;
+	margin-right: 5px;
+	vertical-align: middle;
+	transition: all 0.6s ease 0s;
+}
+
+#searchBar .icon-search {
+	position: absolute;
+	top: 3px;
+	left: 10px;
+}
+
+#searchBar .icon-cloud,
+#searchBar .icon-cancel {
+	position: absolute;
+	top: 3px;
+	cursor: pointer;
+	right: 10px;
+}
+
+.rectInput {
+	background: #fcfcfc;
+	border: 1px solid #BBB;
+	cursor: pointer;
+	border-radius: 4px;
+    outline: none;
+}
+
+.rectInput:focus {
+	border-color: #6db3fd;
+	box-shadow: inherit;
+	cursor: text;
+}
+
+#search {
+	width: 150px;
+	min-height: inherit;
+	height: 24px;
+	padding: 5px 23px 5px 25px; /** Padding for the icons **/
+	transition: all 0.4s ease 0s;
+	text-overflow: ellipsis;
+}
+
+#search:placeholder-shown ~ .icon-cloud,
+#search:placeholder-shown ~ .icon-cancel,
+#search:not(:focus) ~ .icon-cloud, 
+#search.globalSearch ~ .icon-cloud,
+#search:not(.globalSearch):focus ~ .icon-cancel {
+	display: none;
+}
+
+
+/*** NEW SEARCH RESULTS ****/
+
+#searchResults {
+	z-index: 1;
+	width: 300px;
+	overflow: hidden;
+	background: #ddd;
+	max-height: 90%;
+	height: 300px;
+	position: absolute;
+	top: 0;
+	right: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: -5px 6px 36px 0px rgba(0, 0, 0, 0.4);
+}
+
+#searchResultsContainer {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: calc(100% - 20px);
+}
+
+#searchResultsServices {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+#searchResultsEmpty {
+	text-align: center;
+	padding-top: 40%;
+	font-size: 16px;
+	height: 100%;
+}
+
+#searchResultsServices > span {
+	display: table-cell;
+	font-size: 11px;
+	text-align: center;
+	cursor: pointer;
+	color: #383838;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#searchResultsServices > span > span {
+	height: 5px;
+	display: block;
+}
+
+#searchResultsLoading {
+    text-align: center;
+    padding-top: 40%;
+}
+
+#playlistSelectDiv {
+	top: -16px;
+	height: 24px;
+	width: 40%;
+	position: relative;
+	float: right;
+	margin-right: 10px;
+}
+
+#playlistSelect {
+	-webkit-appearance: none;
+	padding: 2px 0px 0px 10px;
+	width: 100%;
+}
+
+#playlistSelectDiv .icon {
+	position: absolute;
+	right: 5px;
+	top: 3px;
+}
+
+/* ==========================================================================
+@NowPlaying
+========================================================================== */
+
+#playerMetadatas {
+	-webkit-app-region: no-drag;
+	float: left;
+	top: -25px;
+	width: 40%;
+	height: 40px;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#playerTrackArtist {
+	position: absolute;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 50%;
+	text-overflow: ellipsis;
+	top: 14px;
+	left: 50px;
+	font-size: 12px;
+	color: #797979;
+}
+
+#playerTrackTitle {
+	position: absolute;
+	left: 50px;
+	white-space: nowrap;
+	overflow: hidden;
+	top: -6px;
+	max-width: 70%;
+	text-overflow: ellipsis;
+	font-size: 14px;
+}
+
+#playerTrackCover {
+	top: -1px;
+	position: relative;
+	border: 1px solid #949599;
+	height: 41px;
+	width: 41px;
+	float: left;
+}
+
+#playerControls {
+	-webkit-app-region: no-drag;
+	top: 10px;
+	height: 27px;
+	position: relative;
+	padding: 0 10px;
+	overflow: hidden;
+	width: 150px;
+	display: flex;
+	align-items: center;
+}
+
+#playerControls span {
+	display: block;
+	overflow: hidden;
+	text-align: center;
+	flex-grow: 1;
+}
+
+#playerControls i {
+	font-size: 22px;
+	color: #565758;
+	cursor: pointer;
+}
+
+#playerPlaypauseBtn i {
+	font-size: 37px;
+}
+
+#playerTime {
+	float: right;
+	right: 0px;
+	position: absolute;
+	text-align: right;
+	top: 16px;
+	color: #5a5a5a;
+	font-size: 11px;
+}
+
+#playerMoreBtn {
+	position: absolute;
+	right: 0;
+	top: -7px;
+	cursor: pointer;
+}
+
+#playerProgress {
+	position: absolute;
+	margin: 0px 40px;
+	border-radius: 10px;
+	top: 35px;
+	width: calc(100% - 50px);
+	height: 4px;
+	box-sizing: content-box;
+	background: #CCCCCC;
+	left: 10px;
+	z-index: -1;
+}
+
+#playerProgressContainer {
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+	height: 100%;
+	padding: 25px 0px 5px 0px;
+	margin-top: -10px;
+	top: -5px;
+	height: 25px;
+}
+
+#playerProgress:hover #playerProgressBar::before {
+	background: rgba(255, 255, 255, 0.5);
+}
+
+#playerProgress:hover #playerProgressBar::after {
+	transform: scale(1);
+}
+
+#playerProgress #playerProgressBar {
+	z-index: -1;
+	position: relative;
+	cursor: pointer;
+	top: -14px;
+	display: block;
+	width: 100%;
+	right: 100%;
+	height: 4px;
+	border-radius: 10px;
+	background: rgb(0, 124, 255);
+}
+
+#playerProgress #playerBufferBar {
+	z-index: -1;
+	display: block;
+	position: relative;
+	top: -10px;
+	width: 100%;
+	right: 100%;
+	height: 4px;
+	border-radius: 10px;
+	background: #BBB;
+	/*transition: transform 0.5s ease-in;*/
+}
+
+#playerProgress #playerProgressBar::before {
+	content: '';
+	position: absolute;
+	display: block;
+	height: 4px; width: 100%;
+	background: rgba(0, 0, 0, 0.15);
+	z-index: -1;
+	transition: all 0.1s ease-out;
+}
+
+#playerProgress #playerProgressBar::after {
+	content: '';
+	position: relative;
+	top: -4px; left: 6px;
+	display: block;
+	float: right;
+	height: 12px; width: 12px;
+	background: white;
+	border-radius: 50%;
+	box-shadow: 0 0 2px 0 #000;
+	transform: scale(0);
+	transition: all 0.1s ease-out;
+}
+
+#playerFavBtn .icon {
+	font-size: 14px;
+}
+
+#playerFavBtn.active,
+#playerFavBtn.active .icon {
+	color: #007CFF;
+}
+
+@media screen and (max-height: 200px) {
+	#footer {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 501px) {
+	#playlistSelectDiv {
+		display: none;
+	}
+
+	#availableShortcuts > div {
+		width: 50%;
+		float: left;
+		padding: 100px 0;
+	}
+}
+
+@media screen and (max-width: 500px){
+
+	#header {
+		max-height: none !important;
+		height: 89px;
+	}
+
+	#header.osx {
+		padding-top: 17px;
+		height: 105px;
+	}
+
+	#sidebar {
+		display: none;
+	}
+
+	#searchBar.expanded { /* use when clicking on searchbar */
+		width: 50%;
+	}
+
+	#searchBar.expanded > #search {
+		width: 100%;
+		padding-left: 25px; /* original value */
+	}
+
+	#searchBar {
+		right: 1%;
+		width: 30px;
+	}
+
+	#search {
+		width: 0;
+    	padding: 0 10px 0 18px;
+	}
+
+	#searchBar:not(.expanded) .icon-cloud,
+	#searchBar:not(.expanded) .icon-cancel {
+		display: none
+	}
+
+	#searchResults {
+		width: 100%;
+		background: #eee;
+		height: 100%;
+		max-height: none;
+		right: 0;
+		border: none;
+		border-radius: 0;
+	}
+
+	#playerMetadatas {
+		width: 95%;
+		top: -22px;
+	}
+
+	#playerControls {
+		position: relative;
+		width: 45%;
+		top: 50px;
+	}
+
+	#playerControls i {
+		font-size: 19px;
+	}
+
+	#playerPlaypauseBtn i {
+	    font-size: 30px;
+	}
+}
+
+
+@media screen and (max-width: 300px){
+	#playerControls {
+		width: 50%;
+	}
+
+	#playlistSelectDiv {
+		width: 30%;
+	}
+
+	.duration {
+		display: none;
+	}
+
+	#coverView > div > h3 { /* coverview: duration margin for track title */
+		margin-right: 20px;
+	}
+}
+
+@media screen and (max-width: 250px){
+	#playerControls {
+		width: 100%;
+	}
+
+	#searchBar,
+	#playlistSelectDiv {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 501px) and (max-width: 650px){
+	#playerControls {
+		width: 130px;
+	}
+
+	#search {
+		width: 110px;
+	}
+}
+
+.small-nav .playlistTitle {
+	padding: 2px 5px 2px 15px;
+}
+
+.small-nav .playlistTitle .icon{
+	display: none;
+}
+
+/*** VOLUME *****/
+
+.player_volume_range {
+	-webkit-appearance: none;
+	width: 100px;
+	display: inline-block;
+	position: absolute;
+	-webkit-transform: rotate(-90deg);
+	left: -33px;
+	margin-top: -70px;
+	border-radius: 5px;
+}
+
+.player_volume_range::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 11px;
+	width: 11px;
+	border-radius: 6px;
+	background: #565758;
+	cursor: pointer;
+	margin-top: -4px;
+}
+
+.player_volume_range::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 3px;
+	cursor: pointer;
+	background: #989898;
+	border-radius: 3px;
+}
+
+.player_volume_range:focus {
+	outline: none;
+}
+
+#volumeBase.red {
+	fill: #e84f4f;
+}
+
+/**** SPINNER **************************/
+
+
+.full_screen {
+    width: 100%;
+    background: white;
+    opacity: 0.95;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.full_screen > :first-child {
+	text-align: center;
+    width: 75%;
+    font-size: 20px;
+}
+
+.spinner {
+	height: 40px;
+	font-size: 10px !important;
+}
+
+.spinner > div {
+	background: #333;
+	height: 100%; width: 6px;
+	display: inline-block;
+	
+	-webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+	animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+	-webkit-animation-delay: -1.1s;
+	animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+	-webkit-animation-delay: -1.0s;
+	animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+	-webkit-animation-delay: -0.9s;
+	animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+	-webkit-animation-delay: -0.8s;
+	animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+	0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+	20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+	0%, 40%, 100% { 
+		transform: scaleY(0.4);
+		-webkit-transform: scaleY(0.4);
+	}  20% { 
+		transform: scaleY(1.0);
+		-webkit-transform: scaleY(1.0);
+	}
+}
+
+/** END OF SPINNER */
+
+/***** scrollbar****/
+::-webkit-scrollbar {
+	width: 7px;
+	height: 7px;
+	background: #f5f5f4;
+}
+
+::-webkit-scrollbar:hover {
+	background: rgba(0, 0, 0, 0.09);
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(0,0,0,0.5);
+	-webkit-border-radius: 100px;
+	background-clip: padding-box;
+	border: 2px solid #f5f5f4;
+	min-height: 10px;
+}
+::-webkit-scrollbar-thumb:active {
+	background: rgba(0,0,0,0.61);
+	-webkit-border-radius: 100px;
+}
+
+@keyframes blink {
+	from, to { opacity: 1 }
+	50% { opacity: 0 }
+}
+
+.blink {
+	animation: blink 1s ease-in infinite;
+}
+
+/** Resizable handles **/
+
+.vertical-resize {
+	position: absolute;
+	right: 0px;
+	top: 0;
+	cursor: col-resize;
+	width: 8px;
+	height: 100%;
+}
+
+
+/**** Special view *****/
+
+#specialView {
+	overflow: hidden;
+}
+
+#specialViewHeader {
+	background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+	display: block;
+	height: 100px;
+}
+
+#specialViewHeader > span {
+	padding: 2px 10px;
+	margin: 0px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+#specialViewImage {
+	height: 100px;
+	float: right;
+}
+
+#specialViewTitle {
+	font-size: 20px;
+	margin: 12px 0px 12px 25px;
+}
+
+#specialViewLoading {
+	margin: auto;
+	text-align: center;
+	height: calc(100% - 100px);
+	padding-top: 25vh;
+}
+
+#specialViewTracksContainer {
+	height: calc(100% - 100px);
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+/******************/
+/**** SETTINGS ****/
+/******************/
+
+.settingsBtn {
+	border: 1px solid;
+	padding: 3px 11px;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+#settingsTabs {
+	height: 40px;
+}
+
+.tabItem {
+	border: solid 1px #666;
+	border-radius: 3px 3px 0 0;
+	padding: 2px 5px;
+	width: 33%;
+	background: #ddd;
+	float: left;
+	cursor: pointer;
+}
+
+.tabItem.selected {
+	border-bottom: none;
+	background: none;
+}
+
+#settings {
+	background: #eee;
+	position: fixed;
+	bottom: 25px;
+	right: 5px;
+	height: 300px;
+	max-height: 60%;
+	overflow: auto;
+	padding: 10px;
+	width: 250px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+	max-width: 90%;
+	z-index: 20000;
+}
+
+#settings select {
+	float: right;
+}
+
+#settings .rectInput {
+	width: 100%;
+	padding-left: 10px;
+}
+
+.textBox {
+	width: 100%;
+	display: inline-block;
+}
+
+.textBox .rectInput {
+    width: 70% !important;
+    float: left;
+}
+
+.textBox input[type='button'] {
+	height: 24px;
+	border-radius: 4px;
+	background: linear-gradient(to bottom, #737577, #52565f);
+	color: #fff;
+	width: 28%;
+	float: right;
+	border: none;
+}
+
+#reset {
+	color: rgb(202, 0, 0);
+	cursor: pointer;
+}
+
+/*** View to show shortcuts ***/
+
+#availableShortcuts {
+	cursor: crosshair;
+	font-family: 'Open Sans', sans-serif;
+	height: 100%;
+	width: 100%;
+	background: rgba(224, 224, 224, 0.95);
+	z-index: 100000;
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+	overflow: scroll;
+}
+
+#availableShortcuts.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+#availableShortcuts * {
+	cursor: crosshair;
+}
+
+#availableShortcuts > div {
+	text-align: center;
+}

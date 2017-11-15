@@ -1,0 +1,163 @@
+#header,
+#footer,
+.tracksContainer,
+.listFilter,
+.listTrack:nth-child(even),
+.coverElement,
+.rectInput,
+.tabItem,
+#specialViewHeader {
+	background: #444;	
+}
+
+#sidebar {
+	background: #4c4c4c;
+}
+
+#header,
+#footer,
+#settings {
+	border-color: #3d3d3d;
+}
+
+.rectInput {
+	border-color: #666;
+}
+
+#playerControls .icon,
+#settings,
+.rectInput, 
+.rectInput ~ .icon,
+.tracksContainer,
+.playlistTitle .icon {
+	color: #ddd;
+}
+
+::-webkit-input-placeholder,
+#playerMetadatas > *,
+.playlistTitle .icon {
+	color: #aaa;
+}
+
+#settings {
+	background: #333;
+}
+
+#playerTrackCover {
+	border-color: #777;
+}
+
+#playerFavBtn.active .icon{
+	color: #3a9aff !important;
+}
+
+#playerProgress {
+	background: #555;
+}
+
+#playerBufferBar {
+	background: #777;
+}
+
+#playerProgressBar {
+	background: #ddd;
+}
+
+/************************/
+/****** sidebar *********/
+/************************/
+
+.serviceTitle { 
+	color: #c0c0c0;
+}
+
+.playlistTitle {
+	color: #d0d0d0;
+}
+
+.playlistTitle.active,
+.playlistTitle.active .icon { 
+	background: #999;
+	color: #444;
+}
+
+.icon.icon-play.playing {
+	color: #65b0ff;
+}
+
+/************************/
+/*** The SpecialView ****/
+/************************/
+
+#specialViewHeader {
+	color: #fff;
+}
+
+/************************/
+/**** The tracklist *****/
+/************************/
+
+.listFilter {
+	border-color: #555;
+}
+
+.listTrack,
+.coverElement,
+.listFilter {
+	color: #bbb;
+}
+
+.listTrack,
+.coverElement {
+	background: #4D4D4D;
+}
+
+/*** Selected track ***/
+
+.listTrack.selected,
+.coverElement.selected {
+	color: #fff;
+	background: #aaa;
+}
+
+
+/** The footer buttons ***/
+.footerBtn {
+	color: #aaa;
+	fill: #aaa;
+}
+
+.footerBtn.active {
+	color: #3a9aff;
+	fill: #3a9aff;
+}
+
+/*** SETTINGS ***/
+
+#settings a {
+	color: #5eb2ff;
+}
+
+/************************/
+/****** Scrollbar *******/
+/************************/
+
+::-webkit-scrollbar {
+	width: 7px;
+	background: #4d4d4d;
+}
+
+::-webkit-scrollbar:hover {
+	background: rgba(0, 0, 0, 0.09);
+}
+
+::-webkit-scrollbar-thumb {
+	background: #666;
+	background-clip: padding-box;
+	border: 1px solid #444;
+	min-height: 10px;
+}
+
+::-webkit-scrollbar-thumb:active {
+	background: rgba(0,0,0,0.61);
+}

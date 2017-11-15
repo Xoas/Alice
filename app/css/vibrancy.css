@@ -1,0 +1,45 @@
+#sidebar {
+	border-right: 1px solid;
+}
+
+#sidebar,
+th,
+#header,
+#specialViewHeader,
+#footer {
+	border-color: rgba(0, 0, 0, .1);
+}
+
+#search,
+#playlistSelect {
+	border-color: rgba(0, 0, 0, .2);
+}
+
+::-webkit-scrollbar:hover,
+::-webkit-scrollbar,
+tr:nth-child(even),
+.toolbar,
+tbody,
+thead,
+#specialViewHeader,
+#trackListTable tbody,
+.coverElement,
+#sidebar,
+#search,
+#playlistSelect {
+	background: none;
+}
+
+::-webkit-scrollbar-thumb {
+	border: 2px solid transparent;
+}
+
+.nav-group-item.active {
+	background-color: #b7b7b7;
+	color: #ffffff;
+}
+
+tr.selected {
+	color: #fff;
+	background: #4f95ff;
+}

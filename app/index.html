@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Harmony</title>
+	<link rel="stylesheet" href="css/vendor/photon.css">
+	<link rel="stylesheet" href="css/fonts.css">
+
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" id='customTheme'> <!-- Used to load custom themes -->
+
+	<link rel="stylesheet" href="css/vendor/basicContext.min.css" />
+	<link rel="stylesheet" href="css/vendor/basicContextDefault.css" />
+</head>
+
+<body>
+	<div id="app" class="window">
+		<header ondblclick='toggleMaximize(event)' id="header" class="toolbar toolbar-header">
+			<div class="toolbar-actions">
+				<div id="playerControls">
+					<span id="playerPrevBtn" onclick="Player.prevTrack()">
+						<i class="icon icon-fast-backward thin"></i>
+					</span>
+					<span id="playerPlaypauseBtn" onclick="Player.playPause()">
+						<i id="playpauseIcon" class="icon"></i>
+					</span>
+					<span id="playerNextBtn" onclick="Player.nextTrack()">
+						<i class="icon icon-fast-forward thin"></i>
+					</span>
+					<span title='Like playing track' id="playerFavBtn" onclick="Player.FavPlaying()">
+						<i class="icon icon-heart" ></i>
+					</span>
+				</div>
+				<div id="playerMetadatas">
+					<img id="playerTrackCover" src='img/blank_artwork.png' onerror="this.onerror=null;this.src='img/blank_artwork.png'" />
+					<span id="playerTrackTitle"></span>
+					<span id="playerTrackArtist"></span>
+					<span id="playerTime"><span id='playerCurrentTime'>0:00</span> / <span id='playerDuration'>0:00</span></span>
+					<div id="playerProgress">
+						<div id="playerProgressContainer">
+							<span id="playerBufferBar"></span>
+							<span id="playerProgressBar"></span>
+						</div>
+					</div>
+					<span id='playerMoreBtn' class="icon icon-dot-3" onclick="trackContextMenu(event, null, [g.playing])"></span>
+				</div>
+				<audio id="player" controls src="" class="hide"></audio>
+				<!-- now player / end -->
+
+
+				<div id='searchBar' class="form-group pull-right">
+					<input type="search" class='rectInput' oninput="search(settings.activeTab.split(',')[0])" onfocus="addClass('searchBar', 'expanded');addClass('playlistSelectDiv', 'hide')" onblur="if (!this.value.length) resetSearch()" placeholder="Search music" id="search" onkeydown = "if (event.keyCode == 13) search(settings.activeTab.split(',')[0], true)">
+
+					<span class="icon icon-search" onclick="getById('search').focus()"></span>
+
+					<span title='Search on the cloud' class="icon icon-cloud" onmousedown="search(settings.activeTab.split(',')[0], true)"></span>
+					<span title='Clear' class="icon icon-cancel" onclick="resetSearch()"></span>
+
+				</div>
+
+				<div id='playlistSelectDiv'>
+					<select class='rectInput' onchange='changeActiveTab(this.value)' id='playlistSelect'></select>
+					<span class="icon icon-arrow-combo" ></span>
+				</div>
+
+			</div>
+		</header>
+
+		<div class="window-content">
+			<div class="pane-group">
+				<div id="sidebar" class="pane pane-sm">
+					<nav class="nav-group" id="menuItems">
+						<!-- Here goes all the sidemenu -->
+					</nav>
+
+					<div class="vertical-resize"></div>
+				</div>
+				 
+				<div id="trackList" class="pane tracksContainer">
+
+					<div id="empty_tracklist" class='tracksContainer'>
+						<p>There is nothing here</p>
+					</div>
+
+					<table id='trackListTable' class="hide table-striped">
+
+						<thead>
+						  <tr >
+						     <th id='track' class='listFilter' onclick="renderView('track')">Track</th>
+						     <th id='artist' onclick="renderView('artist')" class='artist listFilter'>Artist</th>
+						     <th id='album' onclick="renderView('album')" class='listFilter' name='albumCol'>Album</th>
+						     <th id='time' onclick="renderView('time')" class='duration listFilter'>Time</th>
+						  </tr>
+						 </thead>
+
+						<tbody id="track_body" class='tracksContainer'>
+						</tbody>
+
+					</table>
+
+					<div id='coverView' class='hide tracksContainer'></div>
+
+				</div>
+
+				<div id='searchResults' class='hide'>
+					<div id='searchResultsServices'>
+
+					</div>
+
+					<div id='searchResultsLoading'>
+						<div class="spinner">
+							<div class="rect1"></div>
+							<div class="rect2"></div>
+							<div class="rect3"></div>
+							<div class="rect4"></div>
+							<div class="rect5"></div>
+						</div>
+					</div>
+
+					<div id='searchResultsEmpty' class='tracksContainer' >Nothing found.</div>
+
+					<div id='searchResultsContainer' class='tracksContainer'>
+						
+					</div>
+				</div>
+
+				<div id="specialView" class="pane hide">
+
+					<div id="specialViewHeader">
+						<span onclick="hideSpecialView()"><span class="icon icon-left-open"></span> Back</span>
+
+						<img src='img/blank_artwork.png' onerror="this.onerror=null;this.src='img/blank_artwork.png'" id='specialViewImage'/>
+
+						<h3 id='specialViewTitle'></h3>
+					</div>
+
+					<div id='specialViewTracksContainer' class='tracksContainer'>
+						<table class="table-striped">
+						
+							<tbody id="specialViewTracks" class='tracksContainer'>
+							</tbody>
+
+						</table>
+					</div>
+
+					<div id='specialViewEmpty' class='tracksContainer'>Nothing found.</div>
+
+					<div id='specialViewLoading'>
+						<div class="spinner">
+							<div class="rect1"></div>
+							<div class="rect2"></div>
+							<div class="rect3"></div>
+							<div class="rect4"></div>
+							<div class="rect5"></div>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+			<div id="fullscreen_loading" class="full_screen hide">
+				<div class="spinner">
+					<div class="rect1"></div>
+					<div class="rect2"></div>
+					<div class="rect3"></div>
+					<div class="rect4"></div>
+					<div class="rect5"></div>
+				</div>
+			</div>
+			<div id="fullscreen_offline" class="full_screen hide">
+				<p>You're offline, you must use local files to be able to listen offline.
+				<br><a href='#' onclick='openServices()'>Manage enabled services</a></p>
+			</div>
+		</div>
+
+		<footer id="footer" class="toolbar toolbar-footer">
+			<div class="toolbar-actions">
+
+				<span title='Change volume' onclick="toggleDropup('volume_range')" class="footerBtn pull-left">
+					<svg class="footerBtn" style='cursor: pointer' version="1.0" xmlns="http://www.w3.org/2000/svg" width="17px" height="15px" viewBox="0 0 500.000000 500.000000" preserveAspectRatio="xMidYMid meet">
+						<g transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)" stroke="none">
+						<path id="volumeBase" d="M2574 4240 c-19 -6 -259 -207 -592 -495 l-561 -485 -518 0 c-321 0 -532 -4 -555 -10 -44 -13 -93 -66 -107 -117 -15 -54 -15 -1304 0 -1358 14 -50 64 -100 114 -114 27 -7 210 -11 546 -11 l507 0 543 -471 c299 -259 560 -482 580 -495 75 -51 173 -37 227 34 l27 35 3 1685 c2 1553 1 1686 -14 1719 -32 67 -126 105 -200 83z"/>
+						<path id="volume3" d="M4030 4211 c-67 -35 -103 -119 -81 -189 6 -21 38 -73 71 -117 251 -332 410 -726 472 -1170 19 -137 16 -485 -6 -630 -64 -427 -225 -807 -499 -1173 -28 -38 -32 -52 -32 -105 0 -74 25 -116 85 -147 48 -24 87 -25 141 -3 34 13 56 36 119 121 367 494 554 1093 537 1717 -11 380 -84 710 -233 1049 -109 249 -332 594 -417 646 -41 25 -111 26 -157 1z"/>
+						<path id="volume2" d="M3615 3785 c-48 -17 -92 -66 -101 -113 -12 -64 1 -105 71 -208 338 -502 406 -1142 180 -1705 -53 -131 -92 -205 -182 -341 -77 -118 -86 -160 -51 -228 31 -61 77 -90 142 -90 31 0 65 7 86 18 80 43 280 399 360 642 179 544 137 1137 -117 1644 -116 231 -213 364 -281 384 -49 15 -57 15 -107 -3z"/>
+						<path id="volume1" d="M3134 3311 c-54 -24 -86 -71 -92 -132 -5 -52 7 -91 46 -151 13 -20 41 -78 63 -128 144 -333 120 -735 -62 -1042 -51 -87 -58 -138 -27 -198 31 -60 77 -90 140 -90 97 0 135 36 222 209 50 98 112 285 131 395 57 330 9 648 -143 954 -90 182 -168 233 -278 183z"/>
+						</g>
+					</svg>
+				</span>
+
+				<input class="player_volume_range hide" type="range" id="volume_range" min="0.0" max="1" step="0.02" onchange="conf.set('settings', settings);" oninput="volume()" />
+
+				<span title='Refresh library' id="refreshBtn" onclick="getData(true)" class="footerBtn pull-left icon icon-arrows-ccw"></span>
+
+				<div id='refreshStatus' class='hide'>
+					<span id='statusRefresh' class='hide'>Refreshing ...</span>
+					<span id='statusLonger' class='hide'><br>Taking longer than expected ? <a href='#' onclick='getData()'>Retry</a></span>
+					<span id='statusOffline' class='hide'>Offline. <a href='#' onclick='getData()'>Retry</a> later</span>
+					<span id='statusError' class='hide'>Error. <a href='#' onclick='getData()'>Retry</a> later</span>
+				</div> 
+
+				<span title='Toggle random playing' id="shuffle-btn" onclick="toggleShuffle()" class="footerBtn pull-left icon icon-shuffle"></span>
+
+				<span title='Open settings' class="footerBtn pull-right icon icon-cog" onclick="toggleDropup('settings')"></span>
+				
+			</div>
+		</footer>
+
+		<div id='availableShortcuts'>
+			
+			<div>
+				<h2><span class='ctrlorcmd'>Ctrl</span>+K</h2>
+				<p>Toggle sidebar</p>
+
+				<h2><span class='ctrlorcmd'>Ctrl</span>+D</h2>
+				<p>Toggle secondary theme (default: dark)</p>
+
+				<h2><span class='ctrlorcmd'>Ctrl</span>+F</h2>
+				<p>Focus search bar</p>
+
+				<h2><span class='ctrlorcmd'>Ctrl</span>+R</h2>
+				<p>Refresh library</p>
+
+				<h2>?</h2>
+				<p>Toggle shortcuts list</p>
+			</div>
+
+			<div>
+				<h2>Space bar</h2>
+				<p>Play/pause current track</p>
+
+				<h2><span class='ctrlorcmd'>Ctrl</span>+← or p</h2>
+				<p>Previous track</p>
+
+				<h2><span class='ctrlorcmd'>Ctrl</span>+→ or n</h2>
+				<p>Next track</p>
+
+				<h2>l</h2>
+				<p>Like playing tracks</p>
+
+				<h2>q</h2>
+				<p>Play selection next</p>
+			</div>
+
+		</div>
+
+		<div id="settings" class='hide'>
+
+			<div id="settingsTabs">
+				<a id="generalBtn" class="tabItem selected" onclick="showTab('general')">General</a>
+				<a id="themesBtn" class="tabItem" onclick="showTab('themes')">Themes</a>
+				<a id="pluginsBtn" class="tabItem" onclick="showTab('plugins')">Plugins</a>
+			</div>
+
+			<div id='plugins' class='hide'>
+				
+				<span onclick='openServices()' class='settingsBtn' style='border-color:#289cff'>Manage enabled services</span>
+
+				<br><br>
+
+				<div class='textBox'>
+					<p>Install a plugin</p>
+					<input type="text" class='rectInput' id="pluginURL" placeholder=".js plugin url"/>
+					<input type="button" onClick='installPlugin()' value="Install"/>
+				</div>
+
+				<br><br>
+
+				<div id='tempServicesSettings'>
+					
+				</div>
+
+			</div>
+
+			<div id='themes' class='hide'>
+				
+				<input type="checkbox" id="settingsCoverView" onchange="saveChange('coverView', this.checked);renderView()"> Enable Cover view
+				<br><br>
+				Default theme
+				<select class='rectInput' id="settingsPrimaryTheme" onchange="saveChange('primaryTheme',this.value);updateThemes()"></select>
+				<br>
+				Secondary theme
+				<select class='rectInput' id="settingsSecondaryTheme" onchange="saveChange('secondaryTheme',this.value);updateThemes()"></select>
+				<br><br>
+				<div class='textBox'>
+					<p>Install a theme</p>
+					<input type="text" class='rectInput' id="themeURL" placeholder=".css theme url"/>
+					<input type="button" onClick='installTheme()' value="Install"/>
+				</div>
+			</div>
+
+			<div id='general'>
+
+				<span onclick='remote.app.quit()' class='settingsBtn' style='border-color:red'>Quit Harmony</span>
+				<br><br>
+				<input type="checkbox" id="settingsRefreshOnStart" onchange="saveChange('refreshOnStart', this.checked)"> Refresh library at start
+				<br>
+				<br>
+				<input type="radio" name='tray' id="settingscontrols" onchange="saveChange('tray', 'controls');updateTray()"> Controls in menubar
+				<br>
+				<div class='onlyMac'><input type="radio" name='tray' id="settingspinned" onchange="saveChange('tray', 'pinned');updateTray()"> Pin app to menubar</div>
+				<input type="radio" name='tray' id="settingsnone" onchange="saveChange('tray', 'none');updateTray()"> Disable tray
+				<br>
+				<br>
+
+				<a onclick="require('electron').shell.openExternal('https://getharmony.xyz/buy')" href='#'>Get a license</a>
+				<input class='rectInput' type="text" onchange="saveChange('license', this.value)" onkeypress="saveChange('license', this.value)"" id="settingsLicenseBox" placeholder="Paste your license"/>
+				<br>
+				<br>
+
+				<a href="#" onClick="removeClass('settingsAdvanced', 'hide')">Advanced ...</a>
+				<div id='settingsAdvanced' class='hide'>
+					<br>
+					<input type="checkbox" id="settingsCheckUpdate" onchange="saveChange('checkUpdate', this.checked)"> Check for updates at start
+					<br>
+					<input type="checkbox" id="settingsNotifOff" onchange="saveChange('notifOff', this.checked)"> Disable notifications
+					<br>
+					<input type="checkbox" id="settingsCoverViewNoAlbums" onchange="saveChange('coverViewNoAlbums', this.checked);renderView()"> Cover view: Disable album grouping
+					<br>
+					<br>
+					<div id="trayIconSettings">
+						Tray Icon style
+						<select class='rectInput' id="settingsTrayIconStyle" onchange="saveChange('trayIconStyle',this.value)">
+							<option value="normal">Default</option>
+							<option value="white">White</option>
+							<option value="black">Black</option>
+						</select>
+					</div>
+
+					<span onclick="resetSettings(true)" id="reset">Reset cache and settings</span>
+				</div>
+
+			</div>
+		</div>
+</body>
+
+<script src="js/utils.js"></script>
+<script src="js/vendor/clipboard.min.js"></script>
+<script src="js/vendor/mousetrap.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/player.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/main.js"></script>
+<script src="js/keyshortcuts.js"></script>
+<script src="js/contextmenu.js"></script>
+<script src="js/resize.js"></script>
+
+</html>
